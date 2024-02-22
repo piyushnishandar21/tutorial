@@ -1,0 +1,60 @@
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Set up the screen
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Car Game")
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+
+# Car parameters
+car_width = 60
+car_height = 80
+car_x = screen_width // 2 - car_width // 2
+car_y = screen_height - car_height - 30
+car_speed = 5
+
+# Main game loop
+clock = pygame.time.Clock()
+game_over = False
+
+while not game_over:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            game_over = True
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        car_x -= car_speed
+    if keys[pygame.K_RIGHT]:
+        car_x += car_speed
+
+    # Boundary check
+    if car_x < 0:
+        car_x = 0
+    elif car_x > screen_width - car_width:
+        car_x = screen_width - car_width
+
+    # Clear the screen
+    screen.fill(WHITE)
+
+    # Draw the car
+    pygame.draw.rect(screen, BLACK, (car_x, car_y, car_width, car_height))
+
+    # Update the display
+    pygame.display.flip()
+
+    # Cap the frame rate
+    clock.tick(60)
+
+# Quit Pygame
+pygame.quit()
+sys.exit()

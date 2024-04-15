@@ -4,4 +4,4 @@ import sys
 pygame.init()
 # Set up display
 WIDTH, HEIGHT = 800, 600 
-screen = pygame.
+screen = pygame.display.set_
